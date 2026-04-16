@@ -5,69 +5,68 @@ import {
     onSnapshot, serverTimestamp 
 } from './firebase.js';
 
-// --- Character Data ---
+// --- AI Model Data ---
 const characters = [
     {
-        id: 'ironman',
-        name: 'Iron Man',
-        tagline: 'Genius, Billionaire, Playboy, Philanthropist.',
-        image: 'assets/ironman.jpg',
-        powers: ['Powered Armor Suit', 'Genius Intelligence', 'Flight & Repulsors', 'Advanced AI (J.A.R.V.I.S)'],
-        description: 'Tony Stark is a visionary who used his genius to protect the world. His journey from a selfish weapons dealer to a selfless hero is the heart of the Marvel Cinematic Universe.',
-        color: '#ED1D24',
-        accent: 'rgba(237, 29, 36, 0.4)'
+        id: 'gpt4o',
+        name: 'GPT-4o',
+        tagline: 'The Omni-Model: Seamless Text, Audio, and Vision.',
+        image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800',
+        powers: ['Native Multimodality', 'Human-Like Latency', 'Advanced Reasoning', 'Contextual Emotion'],
+        description: 'OpenAI\'s flagship "Omni" model is designed for natural human-computer interaction. It processes text, audio, and images in real-time, bridging the gap between machine and emotional intelligence.',
+        color: '#74aa9c',
+        accent: 'rgba(116, 170, 156, 0.4)'
     },
     {
-        id: 'spiderman',
-        name: 'Spider-Man',
-        tagline: 'With Great Power, Comes Great Responsibility.',
-        image: 'assets/spider.jpg',
-        powers: ['Spider-Sense', 'Superhuman Strength & Agility', 'Wall-Crawling', 'Web-Shooters'],
-        description: 'Peter Parker is the relatable hero who balances life as a teenager with the heavy burden of being a friendly neighborhood Spider-Man. He represents hope and perseverance.',
-        color: '#E62429',
-        accent: 'rgba(230, 36, 41, 0.4)'
+        id: 'claude35',
+        name: 'Claude 3.5 Sonnet',
+        tagline: 'The Reasoning Sentinel: Nuanced, Fast, and Human.',
+        image: 'https://images.unsplash.com/photo-1620712943543-bcc4628c6757?auto=format&fit=crop&q=80&w=800',
+        powers: ['Exceptional Coding', 'Nuanced Writing', 'Visual Analysis', 'Safety-First Architecture'],
+        description: 'Anthropic\'s most advanced model to date. Claude 3.5 Sonnet sets new industry benchmarks for coding and logical reasoning while maintaining a sophisticated, human-like tone.',
+        color: '#D97757',
+        accent: 'rgba(217, 119, 87, 0.4)'
     },
     {
-        id: 'cap',
-        name: 'Captain America',
-        tagline: 'I can do this all day.',
-        image: 'assets/captain.png',
-        powers: ['Super Soldier Serum', 'Indestructible Shield', 'Expert Tactician', 'Enhanced Strength & Reflexes'],
-        description: 'Steve Rogers is the moral compass of the Avengers. A man out of time, he stands for freedom, justice, and the unwavering belief in doing what is right.',
-        color: '#0054A6',
-        accent: 'rgba(0, 84, 166, 0.4)'
+        id: 'gemini15',
+        name: 'Gemini 1.5 Pro',
+        tagline: 'The Long-Context Voyager: Analyzing Worlds of Data.',
+        image: 'https://images.unsplash.com/photo-1633533412151-8576ddafbc9e?auto=format&fit=crop&q=80&w=800',
+        powers: ['2M Token Context', 'Deep Data Extraction', 'Cross-Modal Analysis', 'Google Ecosystem Integration'],
+        description: 'Google DeepMind\'s powerhouse. With a massive 2 million token context window, Gemini 1.5 Pro can digest entire codebases, hour-long videos, and massive research papers in seconds.',
+        color: '#4285F4',
+        accent: 'rgba(66, 133, 244, 0.4)'
     },
     {
-        id: 'thor',
-        name: 'Thor',
-        tagline: 'The God of Thunder.',
-        image: 'assets/thor.jpg',
-        powers: ['Mjolnir/Stormbreaker', 'Weather Manipulation', 'Interdimensional Travel', 'Superhuman Longevity'],
-        description: 'The Prince of Asgard, Thor Odinson has evolved from an arrogant warrior to a cosmic defender of the Nine Realms, mastering the true power of thunder and lightning.',
-        color: '#FFD700',
-        accent: 'rgba(255, 215, 0, 0.4)'
+        id: 'llama3',
+        name: 'Llama 3',
+        tagline: 'The Open-Source Titan: Powering the Community.',
+        image: 'https://images.unsplash.com/photo-1676299081847-824916de030a?auto=format&fit=crop&q=80&w=800',
+        powers: ['Open-Weights Freedom', 'Massive Performance Scale', 'Efficient Fine-Tuning', 'Broad Language Support'],
+        description: 'Meta\'s state-of-the-art open model. Llama 3 brings frontier-level intelligence to the open-source community, enabling developers worldwide to build custom, private AI solutions.',
+        color: '#0668E1',
+        accent: 'rgba(6, 104, 225, 0.4)'
     },
     {
-        id: 'hulk',
-        name: 'Hulk',
-        tagline: "That's my secret, Cap: I'm always angry.",
-        image: 'assets/hulk.jpg',
-        powers: ['Incredible Strength', 'Rapid Healing', 'Near-Invulnerability', 'Gamma Radiation Absorption'],
-        description: 'Dr. Bruce Banner and the Hulk represent the duality of man. While one is a brilliant scientist, the other is an unstoppable force of nature that levels mountains.',
-        color: '#2A7E19',
-        accent: 'rgba(42, 126, 25, 0.4)'
+        id: 'midjourney',
+        name: 'Midjourney v6',
+        tagline: 'The Aesthetic Visionary: Pixel-Perfect Dreams.',
+        image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800',
+        powers: ['Unrivaled Aesthetics', 'Style Consistency', 'Text-to-Masterpiece', 'Advanced Zoom & Pan'],
+        description: 'The industry gold standard for generative art. Midjourney v6 creates photorealistic and artistic imagery that blurs the line between human creativity and machine generation.',
+        color: '#FF00FF',
+        accent: 'rgba(255, 0, 255, 0.4)'
     },
     {
-        id: 'blackpanther',
-        name: 'Black Panther',
-        tagline: 'Wakanda Forever!',
-        image: 'assets/panther.jpg',
-        powers: ['Vibranium Suit', 'Enhanced Strength & Senses', 'Advanced Wakandan Tech', 'Kinetic Energy Absorption'],
-        description: "T'Challa, King of Wakanda, is a warrior king who leads with wisdom and protects his people's secrets while using their advanced technology to aid the world.",
-        color: '#9E7BFF',
-        accent: 'rgba(158, 123, 255, 0.4)'
+        id: 'sora',
+        name: 'Sora',
+        tagline: 'The World Simulator: Breathing Life into Pixels.',
+        image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800',
+        powers: ['Real-World Physics', 'Complex Scene Generation', '60-Second Continuity', 'Cinematic Motion'],
+        description: 'Opening a new chapter in video generation. Sora transforms text into hyper-realistic video, simulating world physics and characters with unprecedented detail and temporal consistency.',
+        color: '#00F2FF',
+        accent: 'rgba(0, 242, 255, 0.4)'
     }
-
 ];
 
 // --- State Management ---
@@ -145,6 +144,9 @@ function openCharacterModal(char) {
     document.getElementById('modalName').style.color = char.color;
     document.getElementById('modalTagline').innerText = char.tagline;
     document.getElementById('modalPowers').innerHTML = char.powers.map(p => `<li>${p}</li>`).join('');
+    // Change heading to Capabilities
+    document.querySelector('.powers h4').innerText = 'Core Intelligence Specialties';
+    document.querySelector('.description h4').innerText = 'Intelligence Overview';
     document.getElementById('modalDesc').innerText = char.description;
     
     // Set custom property for modal glow
@@ -346,7 +348,7 @@ function loadFeed() {
             item.innerHTML = `
                 <div class="user-meta">
                     <span style="font-weight: 600;">${data.user.split('@')[0]}</span>
-                    <span style="color: ${accentColor}">${data.character} Enthusiast</span>
+                    <span style="color: ${accentColor}">${data.character} Specialist</span>
                 </div>
                 <p class="reason">"${data.reason}"</p>
             `;

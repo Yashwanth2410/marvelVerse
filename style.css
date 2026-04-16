@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap');
 
 :root {
-    --primary-red: #ED1D24;
-    --primary-red-glow: rgba(237, 29, 36, 0.6);
-    --secondary-gold: #FFD700;
-    --dark-bg: #0A0A0A;
-    --dark-surface: #151515;
+    --primary-red: #00F2FF; /* Cyber Cyan */
+    --primary-red-glow: rgba(0, 242, 255, 0.4);
+    --secondary-gold: #8A2BE2; /* Neural Purple */
+    --accent-green: #00FF41; /* Matrix Green */
+    --dark-bg: #050505;
+    --dark-surface: #0F0F0F;
     --glass-bg: rgba(255, 255, 255, 0.05);
     --glass-border: rgba(255, 255, 255, 0.1);
     --text-primary: #FFFFFF;
@@ -57,13 +58,15 @@ section {
 }
 
 .hero-content h1 {
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(3rem, 10vw, 7rem);
     font-weight: 900;
-    margin-bottom: 20px;
-    background: linear-gradient(to bottom, #fff, #888);
+    letter-spacing: 20px;
+    background: linear-gradient(to right, #fff, var(--primary-red));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+    filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.3));
+    margin-right: -20px; /* Offset the letter spacing */
+    margin-bottom: 20px;
     animation: fadeInScale 1s ease-out;
 }
 
@@ -252,7 +255,8 @@ section {
 
 .character-card:hover .info-icon {
     opacity: 1;
-    transform: rotate(90deg);
+    color: var(--primary-red);
+    transform: rotate(90deg) scale(1.2);
 }
 
 .card-info .tagline {
